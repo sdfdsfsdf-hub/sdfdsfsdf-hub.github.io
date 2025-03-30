@@ -1,6 +1,6 @@
 // Initialize Firebase (replace the placeholders with your Firebase config)
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js';
+import { getFirestore, collection, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCT1nS5OWF9MYSsUjESlTzwhAy3okZT86g",
@@ -73,12 +73,39 @@ function showNextQuestion() {
 }
 
 // Handle the next button click
-nextButton.addEventListener('click', () => {
+nextButton.addEventListener('click', async () => {
     const selectedOption = document.querySelector('input[name="answer"]:checked');
-    if (selectedOption) {
-        answeredCount++; // Increase answered count
+    
+    if (!selectedOption) {
+        alert("Selecione uma resposta!");
+        return;
     }
-    showNextQuestion(); // Show the next question
+
+    answeredCount++; // Increase answered count
+
+    const answer = selectedOption.value;
+    const questionId = questions[currentQuestionIndex].id;
+
+      // Store the answer in Firestore
+    try {
+        await addDoc(collection(db, 'user_answers'), {
+          questionId: questionId,
+          answer: answer,
+          timestamp: new Date()
+        });
+        console.log("Answer saved to Firestore!");
+
+        // Move to the next question
+        currentQuestionIndex++;
+        displayQuestion();
+      } catch (error) {
+        console.error("Error saving answer to Firestore: ", error);
+      }
+
+      showNextQuestion(); // Show the next question
+    
+      
+
 });
 
 // Initialize the quiz by loading questions
