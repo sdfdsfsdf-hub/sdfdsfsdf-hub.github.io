@@ -43,8 +43,7 @@ async function loadQuestions() {
 // Display the next question
 function showNextQuestion() {
     if (currentQuestionIndex >= questions.length) {
-        // Quiz completed, show a message or reset
-        questionSection.innerHTML = "<h2>Quiz Complete!</h2>";
+        questionSection.innerHTML = "<h2>Completo!</h2>";
         nextButton.style.display = "none";
         return;
     }
