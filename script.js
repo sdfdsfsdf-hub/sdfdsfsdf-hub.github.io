@@ -18,8 +18,9 @@ const db = getFirestore(app);
 // Fetch questions from Firestore
 const getQuestions = async () => {
     const questionsCollection = collection(db,'questions');
-    const snapshot = await questionsCollection.get();
+    const snapshot = await getDocs(questionsCollection);;
     const questions = snapshot.docs.map(doc => doc.data());
+    console.log(questions)
     return questions;
 };
 
