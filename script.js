@@ -20,7 +20,6 @@ const getQuestions = async () => {
     const questionsCollection = collection(db,'questions');
     const snapshot = await getDocs(questionsCollection);;
     const questions = snapshot.docs.map(doc => doc.data());
-    console.log(questions)
     return questions;
 };
 
@@ -55,7 +54,7 @@ function showNextQuestion() {
 
     // Create question text and answer options
     questionElement.innerHTML = `
-        <p>${question.text}</p>
+        <p style="font-size: 2em; font-weight: bold; color: #333; margin-bottom: 20px; text-align: left;">${question.text}</p>
         ${question.options.map((option, index) => `
             <label>
                 <input type="radio" name="answer" value="${option}">
@@ -103,8 +102,6 @@ nextButton.addEventListener('click', async () => {
       }
 
       showNextQuestion(); // Show the next question
-    
-      
 
 });
 
