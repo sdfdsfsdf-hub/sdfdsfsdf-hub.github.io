@@ -12,12 +12,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
-const db = getFirestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // Fetch questions from Firestore
 const getQuestions = async () => {
-    const questionsCollection = db.collection('questions');
+    const questionsCollection = collection(db,'questions');
     const snapshot = await questionsCollection.get();
     const questions = snapshot.docs.map(doc => doc.data());
     return questions;
