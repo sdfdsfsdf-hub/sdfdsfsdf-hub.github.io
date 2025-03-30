@@ -1,4 +1,7 @@
 // Initialize Firebase (replace the placeholders with your Firebase config)
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
+import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCT1nS5OWF9MYSsUjESlTzwhAy3okZT86g",
     authDomain: "quiz-7bbcb.firebaseapp.com",
@@ -9,8 +12,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 // Fetch questions from Firestore
 const getQuestions = async () => {
