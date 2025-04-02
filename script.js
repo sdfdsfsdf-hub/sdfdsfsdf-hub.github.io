@@ -36,6 +36,7 @@ const totalQuestionsElement = document.getElementById('total-questions');
 // Fetch questions from Firestore and display them
 async function loadQuestions() {
     questions = await getQuestions(); // Get questions from Firestore
+    console.log(questions)
     totalQuestionsElement.textContent = questions.length;
     showNextQuestion();
 }
@@ -81,7 +82,7 @@ nextButton.addEventListener('click', async () => {
     }
 
     answeredCount++; // Increase answered count
-
+    console.log(questions[currentQuestionIndex])
     const answer = selectedOption.value;
     const questionId = questions[currentQuestionIndex].id;
 
