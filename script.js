@@ -36,7 +36,6 @@ const totalQuestionsElement = document.getElementById('total-questions');
 // Fetch questions from Firestore and display them
 async function loadQuestions() {
     questions = await getQuestions(); // Get questions from Firestore
-    console.log(questions)
     totalQuestionsElement.textContent = questions.length;
     showNextQuestion();
 }
@@ -82,8 +81,9 @@ nextButton.addEventListener('click', async () => {
     }
 
     answeredCount++; // Increase answered count
-    
+
     const answer = selectedOption.value;
+    console.log(selectedOption)
     const question = questions[currentQuestionIndex-1].question;
 
       // Store the answer in Firestore
@@ -91,7 +91,6 @@ nextButton.addEventListener('click', async () => {
         await addDoc(collection(db, 'user_answers'), {
             question: question,
           answer: answer,
-          timestamp: new Date()
         });
         console.log("Answer saved to Firestore!");
 
