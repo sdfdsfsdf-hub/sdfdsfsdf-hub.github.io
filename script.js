@@ -82,12 +82,9 @@ nextButton.addEventListener('click', async () => {
     }
 
     answeredCount++; // Increase answered count
-    console.log(currentQuestionIndex)
-    console.log(answeredCount)
-    console.log(questions)
-
+    
     const answer = selectedOption.value;
-    const question = questions[currentQuestionIndex].question;
+    const question = questions[currentQuestionIndex-1].question;
 
       // Store the answer in Firestore
     try {
