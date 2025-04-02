@@ -83,20 +83,15 @@ nextButton.addEventListener('click', async () => {
     answeredCount++; // Increase answered count
 
     const answer = selectedOption.value;
-    console.log(selectedOption)
-    const question = questions[currentQuestionIndex-1].question;
+    const question = questions[currentQuestionIndex-1].text;
 
       // Store the answer in Firestore
     try {
-        await addDoc(collection(db, 'user_answers'), {
+        await addDoc(collection(db, 'answers'), {
             question: question,
           answer: answer,
         });
         console.log("Answer saved to Firestore!");
-
-        // Move to the next question
-        currentQuestionIndex++;
-        displayQuestion();
       } catch (error) {
         console.error("Error saving answer to Firestore: ", error);
       }
